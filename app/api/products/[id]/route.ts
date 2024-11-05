@@ -1,6 +1,6 @@
 // /app/api/products/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { products } from '../../../../data'; // Ensure the path to data is correct
+import { products } from '../../../data'; // Ensure the path to data is correct
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
     const { id } = params; // Get the id from the params
