@@ -2,11 +2,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { products } from '../../../data';
 
-// Define what a product looks like (adjust according to your data structure)
-interface Product {
-  id: number;
-  // Add other product properties here
-}
 
 export async function GET(
   request: NextRequest,
@@ -36,9 +31,9 @@ export async function GET(
     }
 
     return NextResponse.json(product);
-  } catch (error) {
+  } catch (err: any) {
     return NextResponse.json(
-      { message: 'Internal server error' },
+      { message: err.message },
       { status: 500 }
     );
   }
