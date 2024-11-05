@@ -3,6 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { products } from '../../../data'; // Adjust the path as necessary
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+    // Ensure params is defined
+    if (!params || !params.id) {
+        return NextResponse.json({ message: 'Product ID is required' }, { status: 400 });
+    }
+
     const { id } = params; // Get the id from the params
     const product = products.find((p) => p.id === parseInt(id)); // Find the product by id
 
