@@ -1,19 +1,13 @@
-import { NextRequest } from 'next/server';
 import { products } from '../../../data';
 
 
-type Props = {
-    params: {
-        id: string;
-    };
-};
 
 export async function GET(
-    request: NextRequest,
-    { params }: Props
+    request: Request,
+    { params }: { params: { productId: string } }
 ) {
     try {
-        const productId = parseInt(params.id);
+        const productId = parseInt(params.productId);
         
         if (isNaN(productId)) {
             return Response.json(
@@ -26,7 +20,7 @@ export async function GET(
         
         if (!product) {
             return Response.json(
-                { message: `Product with id ${params.id} not found` },
+                { message: `Product with id ${productId} not found` },
                 { status: 404 }
             );
         }
