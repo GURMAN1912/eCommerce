@@ -1,16 +1,15 @@
+import { NextRequest, NextResponse } from 'next/server';
 import { products } from '../../../data';
 
-
-
 export async function GET(
-    request: Request,
-    { params }: { params: { productId: string } }
+    request: NextRequest,
+    { params }: { params: { productId: number } }
 ) {
     try {
-        const productId = parseInt(params.productId);
+        const productId = Number(params.productId);
         
         if (isNaN(productId)) {
-            return Response.json(
+            return NextResponse.json(
                 { message: 'Invalid product ID format' },
                 { status: 400 }
             );
@@ -19,17 +18,17 @@ export async function GET(
         const product = products.find((p) => p.id === productId);
         
         if (!product) {
-            return Response.json(
+            return NextResponse.json(
                 { message: `Product with id ${productId} not found` },
                 { status: 404 }
             );
         }
 
-        return Response.json(product);
+        return NextResponse.json(product);
         
     } catch (error) {
         console.error('Error fetching product:', error);
-        return Response.json(
+        return NextResponse.json(
             { message: 'Internal server error' },
             { status: 500 }
         );
