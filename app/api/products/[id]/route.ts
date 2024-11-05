@@ -1,19 +1,45 @@
 // /app/api/products/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { products } from '../../../data'; // Adjust the path as necessary
+import { products } from '../../../data';
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
-    // Ensure params is defined
-    if (!params || !params.id) {
-        return NextResponse.json({ message: 'Product ID is required' }, { status: 400 });
+// Define what a product looks like (adjust according to your data structure)
+interface Product {
+  id: number;
+  // Add other product properties here
+}
+
+export async function GET(
+  request: NextRequest,
+  context: {
+    params: {
+      id: string;
+    };
+  }
+) {
+  try {
+    const { id } = context.params;
+
+    if (!id) {
+      return NextResponse.json(
+        { message: 'Product ID is required' },
+        { status: 400 }
+      );
     }
 
-    const { id } = params; // Get the id from the params
-    const product = products.find((p) => p.id === parseInt(id)); // Find the product by id
+    const product = products.find((p) => p.id === parseInt(id));
 
-    if (product) {
-        return NextResponse.json(product); // Return the found product
-    } else {
-        return NextResponse.json({ message: `Product with id ${id} not found` }, { status: 404 }); // Return a not found message
+    if (!product) {
+      return NextResponse.json(
+        { message: `Product with id ${id} not found` },
+        { status: 404 }
+      );
     }
+
+    return NextResponse.json(product);
+  } catch (error) {
+    return NextResponse.json(
+      { message: 'Internal server error' },
+      { status: 500 }
+    );
+  }
 }
