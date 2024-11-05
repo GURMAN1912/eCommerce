@@ -3,10 +3,9 @@ import { products } from '../../../data';
 
 export async function GET(
     request: NextRequest,
-    context: { params: { productId: string } } // Explicitly type `context` with `{ params: { productId: string } }`
+    context: { params: { productId: string } }
 ) {
-    const { productId } = await context.params;
-    console.log(context);
+    const { productId } = await context.params; // Ensure params are awaited
 
     try {
         const parsedProductId = Number(productId); // Convert to number
