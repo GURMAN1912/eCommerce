@@ -1,12 +1,6 @@
 import { NextRequest } from 'next/server';
 import { products } from '../../../data';
 
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    description: string;
-}
 
 type Props = {
     params: {
