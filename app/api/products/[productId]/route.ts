@@ -3,12 +3,13 @@ import { products } from '../../../data';
 
 export async function GET(
     request: NextRequest,
-    context: { params: { productId: string } } // Rename destructuring to 'context' to clarify async handling
+    context: { params: { productId: string } } // Explicitly type `context` with `{ params: { productId: string } }`
 ) {
-    const { productId } = await context.params; // Await params here
+    const { productId } = await context.params;
+    console.log(context);
 
     try {
-        const parsedProductId = Number(productId); // Convert to number if necessary
+        const parsedProductId = Number(productId); // Convert to number
 
         if (isNaN(parsedProductId)) {
             return NextResponse.json(
