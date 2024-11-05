@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server';
 import iphone from './assests/iphone.jpg';
 import tshirt from './assests/tshirt.jpeg';
 import book from './assests/books.jpeg';

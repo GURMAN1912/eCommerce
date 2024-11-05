@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { clearCart } from '../store/cartSlice';
 
 const PaymentSuccessPage: React.FC = () => {
-    const router = useRouter();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(clearCart());

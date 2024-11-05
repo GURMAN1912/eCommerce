@@ -1,5 +1,5 @@
 // /pages/api/products/[id].ts
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest} from 'next';
 import { products } from '../../../data'; // Make sure this path is correct
 import { NextResponse } from 'next/server';
 
