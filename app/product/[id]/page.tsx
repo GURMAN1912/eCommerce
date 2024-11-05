@@ -34,7 +34,9 @@ const ProductDetailPage: React.FC = () => {
         const fetchProduct = async () => {
             if (!id) return;
             try {
-                const response = await axios.get(`/api/products/${id}`);
+                const response = await axios.post('/api/products/134', {
+                    productId: id, // Send productId in the request body
+                });
                 setProduct(response.data);
             } catch (error) {
                 console.error("Error fetching product details:", error);

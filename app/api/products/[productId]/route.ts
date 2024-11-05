@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { products } from '../../../data';
 
-export async function GET(
-    request: NextRequest,
-    context: { params: { productId: string } }
-) {
-    const { productId } = await context.params; // Ensure params are awaited
-
+export async function POST(request: NextRequest) {
     try {
-        const parsedProductId = Number(productId); // Convert to number
+        const { productId } = await request.json();
 
+        const parsedProductId = Number(productId);
         if (isNaN(parsedProductId)) {
             return NextResponse.json(
                 { message: 'Invalid product ID format' },
@@ -18,7 +14,6 @@ export async function GET(
         }
 
         const product = products.find((p) => p.id === parsedProductId);
-
         if (!product) {
             return NextResponse.json(
                 { message: `Product with id ${parsedProductId} not found` },
