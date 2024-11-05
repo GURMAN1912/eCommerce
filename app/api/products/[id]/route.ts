@@ -1,15 +1,14 @@
-// /pages/api/products/[id].ts
-import { NextApiRequest} from 'next';
-import { products } from '../../../data'; // Make sure this path is correct
-import { NextResponse } from 'next/server';
+// /app/api/products/[id]/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { products } from '../../../../data'; // Ensure the path to data is correct
 
-export function GET(req: NextApiRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
     const { id } = params; // Get the id from the params
     const product = products.find((p) => p.id === parseInt(id)); // Find the product by id
 
     if (product) {
         return NextResponse.json(product); // Return the found product
     } else {
-        return NextResponse.json({ message: `Product with id ${id} not found` }); // Return a not found message
+        return NextResponse.json({ message: `Product with id ${id} not found` }, { status: 404 }); // Return a not found message
     }
 }
